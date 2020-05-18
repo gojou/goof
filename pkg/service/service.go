@@ -1,21 +1,43 @@
 package service
 
+import (
+	"github.com/gojou/goof/pkg/models"
+	"github.com/gojou/goof/pkg/repository"
+	"github.com/gorilla/mux"
+)
+
 // Service is just this struct, you know?
-type Service struct {
+
+type service struct {
+	r *repository.Repository
+	m *mux.Router
 }
 
-type Struct interface {
-	GetFencer(id string) (*Fencer, error)
-	AddFencer(fencer *Fencer) (*Fencer, error)
-	ListFencers() ([]Fencer, error)
+// Service todo
+type Service interface {
+	GetFencer(id string) (*models.Fencer, error)
+	AddFencer(fencer *models.Fencer) (*models.Fencer, error)
+	ListFencers() ([]models.Fencer, error)
 }
 
-func GetFencer(id string) (*Fencer, error) {
+// NewService todo
+func NewService(mux *mux.Router) Service {
+	r := new(repository.Repository)
+
+	return &service{r, mux}
+}
+
+// GetFencer todo
+func (*service) GetFencer(id string) (*models.Fencer, error) {
 	return nil, nil
 }
-func AddFencer(fencer *Fencer) (*Fencer, error) {
+
+// AddFencer todo
+func (*service) AddFencer(fencer *models.Fencer) (*models.Fencer, error) {
 	return nil, nil
 }
-func ListFencers() ([]Fencer, error) {
+
+// ListFencers todo
+func (*service) ListFencers() ([]models.Fencer, error) {
 	return nil, nil
 }
