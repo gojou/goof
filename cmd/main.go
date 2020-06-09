@@ -6,6 +6,9 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/gojou/goof/cmd/routes"
+	"github.com/gojou/goof/pkg/service"
+
 	"github.com/gorilla/mux"
 )
 
@@ -18,7 +21,11 @@ func main() {
 }
 func run() (e error) {
 	r := mux.NewRouter()
-	routing(r)
+	s := service.NewService(r)
+	fs, _ := s.ListFencers()
+	log.Println(*fs)
+
+	routes.Routing(r)
 	//	s := service.NewService(r)
 
 	// Critical to work on AppEngine
