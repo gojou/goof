@@ -1,4 +1,4 @@
-package service
+package fencer
 
 import (
 	"encoding/json"
@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gojou/goof/pkg/models"
-	"github.com/gojou/goof/pkg/repository"
+	"github.com/gojou/goof/pkg/services/fencer/repository"
 	"github.com/gorilla/mux"
 )
 
