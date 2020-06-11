@@ -19,7 +19,7 @@ var clubs = []models.Club{
 
 // Repository is the foundation for the methods returned
 type Repository struct {
-	clubs []models.Clubs
+	clubs []models.Club
 }
 
 // Fencer is a member of a fantasy fencing club
