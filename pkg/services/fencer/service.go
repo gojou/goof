@@ -22,7 +22,7 @@ type Service interface {
 	AddFencer(fencer *models.Fencer) (*models.Fencer, error)
 	ListFencers() (*[]models.Fencer, error)
 	Serve(w http.ResponseWriter, r *http.Request)
-	// ServeJSON(w http.ResponseWriter, r *http.Request)
+	ServeJSON(w http.ResponseWriter, r *http.Request)
 }
 
 // NewService todo

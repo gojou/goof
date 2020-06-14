@@ -7,8 +7,6 @@ import (
 	"os"
 
 	"github.com/gojou/goof/cmd/routes"
-	"github.com/gojou/goof/pkg/services/fencer"
-
 	"github.com/gorilla/mux"
 )
 
@@ -21,9 +19,13 @@ func main() {
 }
 func run() (e error) {
 	r := mux.NewRouter()
-	s := fencer.NewService(r)
-	fs, _ := s.ListFencers()
-	log.Println(*fs)
+	
+	// s := fencer.NewService(r)
+	// c := club.NewService(r)
+	// fs, _ := s.ListFencers()
+	// cs, _ := c.ListClubs()
+	// log.Println(*fs)
+	// log.Println(*cs)
 
 	routes.Routing(r)
 	//	s := service.NewService(r)
