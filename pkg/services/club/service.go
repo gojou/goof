@@ -39,7 +39,6 @@ func (s *service) ListClubs() (*[]models.Club, error) {
 
 // AddClub will add a club to the repository
 func (s *service) AddClub(w http.ResponseWriter, r *http.Request) {
-	// w.Header().Set("Content-type", "application/json")
 	var club models.Club
 	err := json.NewDecoder(r.Body).Decode(&club)
 	if err != nil {
