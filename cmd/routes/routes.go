@@ -13,10 +13,11 @@ func Routing(r *mux.Router) {
 	sf := fencer.NewService(r)
 	sc := club.NewService(r)
 
-	r.HandleFunc("/", handlers.Home)
-	r.HandleFunc("/fencer/list", sf.Serve)
-	r.HandleFunc("/fencer/jlist", sf.ServeJSON)
-	r.HandleFunc("/club/list", sc.Serve)
-	r.HandleFunc("/club/jlist", sc.ServeJSON)
+	r.HandleFunc("/", handlers.Home).Methods("GET")
+	r.HandleFunc("/fencer/list", sf.Serve).Methods("GET")
+	r.HandleFunc("/fencer/jlist", sf.ServeJSON).Methods("GET")
+	r.HandleFunc("/club", sc.AddClub).Methods("POST")
+	r.HandleFunc("/club/list", sc.Serve).Methods("GET")
+	r.HandleFunc("/club/jlist", sc.ServeJSON).Methods("GET")
 
 }

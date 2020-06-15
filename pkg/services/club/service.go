@@ -14,7 +14,7 @@ import (
 // Service todo
 type Service interface {
 	// GetClub(id string) (*models.Club, error)
-	// AddClub(fencer *models.Club) (*models.Club, error)
+	AddClub(w http.ResponseWriter, r *http.Request)
 	ListClubs() (*[]models.Club, error)
 	Serve(w http.ResponseWriter, r *http.Request)
 	ServeJSON(w http.ResponseWriter, r *http.Request)
@@ -35,6 +35,26 @@ func NewService(mux *mux.Router) Service {
 // ListFencers returns a list of all fencers in the repo
 func (s *service) ListClubs() (*[]models.Club, error) {
 	return s.r.ListClubs()
+}
+
+// AddClub will add a club to the repository
+func (s *service) AddClub(w http.ResponseWriter, r *http.Request) {
+	// w.Header().Set("Content-type", "application/json")
+	var club models.Club
+	err := json.NewDecoder(r.Body).Decode(&club)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(`"error":"Error unmarshaling the request"`))
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	s.r.AddClub(club)
+	// clist, _ := s.r.ListClubs()
+	// result, _ := json.MarshalIndent(clist, "", "  ")
+	result, _ := json.MarshalIndent(club, "", "  ")
+
+	w.Write(result)
+	return
 }
 
 // Serve turns Service into an HTTP server
