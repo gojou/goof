@@ -1,4 +1,4 @@
-package server
+package rest
 
 import (
 	"encoding/json"
@@ -12,7 +12,7 @@ import (
 
 // Server defines the methods on the server
 type Server interface {
-	ServeJSON(*[]models.Fencer, error) http.HandlerFunc
+	HandleJSON(*[]models.Fencer, error) http.HandlerFunc
 }
 
 type server struct {
@@ -26,7 +26,7 @@ func NewServer(s *fencer.Service, m *mux.Router) Server {
 }
 
 // ServeJSON serves the list of fencers in JSON format
-func (s *server) ServeJSON(fencers *[]models.Fencer, err error) http.HandlerFunc {
+func (s *server) HandleJSON(fencers *[]models.Fencer, err error) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		json, _ := json.MarshalIndent(fencers, "", "  ")
