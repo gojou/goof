@@ -5,10 +5,9 @@ import (
 	"github.com/gojou/goof/pkg/services/fencer/repository"
 )
 
-// service is just this struct, you know?
+// service adds the local dependencies
 type service struct {
 	r *repository.Repository
-	// m *mux.Router
 }
 
 // Service todo
@@ -16,25 +15,21 @@ type Service interface {
 	GetFencer(id string) (*models.Fencer, error)
 	AddFencer(fencer *models.Fencer) (*models.Fencer, error)
 	ListFencers() (*[]models.Fencer, error)
-	// Serve(w http.ResponseWriter, r *http.Request)
-	// ServeJSON(w http.ResponseWriter, r *http.Request)
 }
 
-// NewService todo
-// func NewService(mux *mux.Router) Service {
+// NewService initializes the fencer service
 func NewService() Service {
 	r := new(repository.Repository)
 
-	// return &service{r, mux}
 	return &service{r}
 }
 
-// GetFencer todo
+// GetFencer returns a fencer struct from the repository
 func (*service) GetFencer(id string) (*models.Fencer, error) {
 	return nil, nil
 }
 
-// AddFencer todo
+// AddFencer adds a fencer struct to the repository
 func (*service) AddFencer(fencer *models.Fencer) (*models.Fencer, error) {
 	return nil, nil
 }
