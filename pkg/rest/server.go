@@ -16,6 +16,7 @@ type Server interface {
 	HandleHTTP(*[]models.Fencer, error) http.HandlerFunc
 }
 
+// server defines the local dependencies
 type server struct {
 	s *fencer.Service
 	m *mux.Router
