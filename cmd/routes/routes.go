@@ -16,7 +16,7 @@ func Routing(r *mux.Router) {
 	sh := rest.NewServer(&sf, r)
 
 	r.HandleFunc("/", handlers.Home).Methods("GET")
-	r.HandleFunc("/fencer/list", sf.Serve).Methods("GET")
+	r.HandleFunc("/fencer/list", sh.HandleHTTP(sf.ListFencers())).Methods("GET")
 	r.HandleFunc("/fencer/jlist", sh.HandleJSON(sf.ListFencers())).Methods("GET")
 	r.HandleFunc("/club", sc.AddClub).Methods("POST")
 	r.HandleFunc("/club/list", sc.Serve).Methods("GET")

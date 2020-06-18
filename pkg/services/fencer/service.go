@@ -1,10 +1,6 @@
 package fencer
 
 import (
-	"encoding/json"
-	"fmt"
-	"net/http"
-
 	"github.com/gojou/goof/pkg/models"
 	"github.com/gojou/goof/pkg/services/fencer/repository"
 	"github.com/gorilla/mux"
@@ -21,8 +17,8 @@ type Service interface {
 	GetFencer(id string) (*models.Fencer, error)
 	AddFencer(fencer *models.Fencer) (*models.Fencer, error)
 	ListFencers() (*[]models.Fencer, error)
-	Serve(w http.ResponseWriter, r *http.Request)
-	ServeJSON(w http.ResponseWriter, r *http.Request)
+	// Serve(w http.ResponseWriter, r *http.Request)
+	// ServeJSON(w http.ResponseWriter, r *http.Request)
 }
 
 // NewService todo
@@ -48,16 +44,16 @@ func (s *service) ListFencers() (*[]models.Fencer, error) {
 }
 
 // Serve turns Service into an HTTP server
-func (s *service) Serve(w http.ResponseWriter, r *http.Request) {
-	flist, _ := s.r.ListFencers()
-	fmt.Fprintf(w, "%v\n", *flist)
-
-}
+// func (s *service) Serve(w http.ResponseWriter, r *http.Request) {
+// 	flist, _ := s.r.ListFencers()
+// 	fmt.Fprintf(w, "%v\n", *flist)
+//
+// }
 
 // ServeJSON serves the list of fencers in JSON format
-func (s *service) ServeJSON(w http.ResponseWriter, r *http.Request) {
-	flist, _ := s.r.ListFencers()
-	json, _ := json.MarshalIndent(flist, "", "  ")
-	fmt.Fprintln(w, string(json))
-
-}
+// func (s *service) ServeJSON(w http.ResponseWriter, r *http.Request) {
+// 	flist, _ := s.r.ListFencers()
+// 	json, _ := json.MarshalIndent(flist, "", "  ")
+// 	fmt.Fprintln(w, string(json))
+//
+// }
