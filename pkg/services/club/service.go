@@ -1,11 +1,6 @@
 package club
 
 import (
-	"net/http"
-
-	"encoding/json"
-	"fmt"
-
 	"github.com/gojou/goof/pkg/models"
 	"github.com/gojou/goof/pkg/services/club/repository"
 	"github.com/gorilla/mux"
@@ -16,8 +11,8 @@ type Service interface {
 	// GetClub(id string) (*models.Club, error)
 	AddClub(models.Club) (*models.Club, error)
 	ListClubs() (*[]models.Club, error)
-	Serve(w http.ResponseWriter, r *http.Request)
-	ServeJSON(w http.ResponseWriter, r *http.Request)
+	// Serve(w http.ResponseWriter, r *http.Request)
+	// ServeJSON(w http.ResponseWriter, r *http.Request)
 }
 
 type service struct {
@@ -42,17 +37,17 @@ func (s *service) AddClub(models.Club) (*models.Club, error) {
 	return nil, nil
 }
 
-// Serve turns Service into an HTTP server
-func (s *service) Serve(w http.ResponseWriter, r *http.Request) {
-	clist, _ := s.r.ListClubs()
-	fmt.Fprintf(w, "%v\n", *clist)
-
-}
-
-// ServeJSON serves the list of fencers in JSON format
-func (s *service) ServeJSON(w http.ResponseWriter, r *http.Request) {
-	clist, _ := s.r.ListClubs()
-	json, _ := json.MarshalIndent(clist, "", "  ")
-	fmt.Fprintln(w, string(json))
-
-}
+// // Serve turns Service into an HTTP server
+// func (s *service) Serve(w http.ResponseWriter, r *http.Request) {
+// 	clist, _ := s.r.ListClubs()
+// 	fmt.Fprintf(w, "%v\n", *clist)
+//
+// }
+//
+// // ServeJSON serves the list of fencers in JSON format
+// func (s *service) ServeJSON(w http.ResponseWriter, r *http.Request) {
+// 	clist, _ := s.r.ListClubs()
+// 	json, _ := json.MarshalIndent(clist, "", "  ")
+// 	fmt.Fprintln(w, string(json))
+//
+// }

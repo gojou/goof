@@ -22,8 +22,10 @@ func Routing(r *mux.Router) {
 	r.HandleFunc("/club/jlist", sch.HandleJSON(sc.ListClubs())).Methods("GET")
 	r.HandleFunc("/fencer/list", sfh.HandleHTTP(sf.ListFencers())).Methods("GET")
 	r.HandleFunc("/fencer/jlist", sfh.HandleJSON(sf.ListFencers())).Methods("GET")
+	r.HandleFunc("/club/add", sch.HandleAdd(sc.ListClubs())).Methods("POST")
+
 	// r.HandleFunc("/club", sc.AddClub).Methods("POST")
-	r.HandleFunc("/club/list", sc.Serve).Methods("GET")
-	r.HandleFunc("/club/jlist", sc.ServeJSON).Methods("GET")
+	// r.HandleFunc("/club/list", sc.Serve).Methods("GET")
+	// r.HandleFunc("/club/jlist", sc.ServeJSON).Methods("GET")
 
 }
