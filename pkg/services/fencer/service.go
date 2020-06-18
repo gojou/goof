@@ -3,13 +3,12 @@ package fencer
 import (
 	"github.com/gojou/goof/pkg/models"
 	"github.com/gojou/goof/pkg/services/fencer/repository"
-	"github.com/gorilla/mux"
 )
 
 // service is just this struct, you know?
 type service struct {
 	r *repository.Repository
-	m *mux.Router
+	// m *mux.Router
 }
 
 // Service todo
@@ -22,10 +21,12 @@ type Service interface {
 }
 
 // NewService todo
-func NewService(mux *mux.Router) Service {
+// func NewService(mux *mux.Router) Service {
+func NewService() Service {
 	r := new(repository.Repository)
 
-	return &service{r, mux}
+	// return &service{r, mux}
+	return &service{r}
 }
 
 // GetFencer todo
@@ -42,18 +43,3 @@ func (*service) AddFencer(fencer *models.Fencer) (*models.Fencer, error) {
 func (s *service) ListFencers() (*[]models.Fencer, error) {
 	return s.r.ListFencers()
 }
-
-// Serve turns Service into an HTTP server
-// func (s *service) Serve(w http.ResponseWriter, r *http.Request) {
-// 	flist, _ := s.r.ListFencers()
-// 	fmt.Fprintf(w, "%v\n", *flist)
-//
-// }
-
-// ServeJSON serves the list of fencers in JSON format
-// func (s *service) ServeJSON(w http.ResponseWriter, r *http.Request) {
-// 	flist, _ := s.r.ListFencers()
-// 	json, _ := json.MarshalIndent(flist, "", "  ")
-// 	fmt.Fprintln(w, string(json))
-//
-// }

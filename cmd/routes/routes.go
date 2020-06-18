@@ -11,7 +11,7 @@ import (
 
 // Routing defines the API for goof
 func Routing(r *mux.Router) {
-	sf := fencer.NewService(r)
+	sf := fencer.NewService()
 	sc := club.NewService(r)
 	sh := rest.NewServer(&sf, r)
 
