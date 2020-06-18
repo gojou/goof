@@ -25,7 +25,7 @@ type Repository struct {
 // Club is a member of a fantasy fencing club
 type Club interface {
 	GetClub(id string) (*models.Club, error)
-	AddClub(club models.Club) error
+	AddClub(club models.Club) (*models.Club, error)
 	ListClubs() (*[]models.Club, error)
 }
 
@@ -35,9 +35,9 @@ func (*Repository) GetClub(id string) (*models.Club, error) {
 }
 
 //AddClub adds a club, eventually
-func (*Repository) AddClub(club models.Club) error {
+func (*Repository) AddClub(club models.Club) (*models.Club, error) {
 	clubs = append(clubs, club)
-	return nil
+	return &clubs[len(clubs)-1], nil
 }
 
 //ListClubs lists all clubs, eventually

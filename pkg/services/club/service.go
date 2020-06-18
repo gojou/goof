@@ -14,7 +14,7 @@ import (
 // Service todo
 type Service interface {
 	// GetClub(id string) (*models.Club, error)
-	AddClub(w http.ResponseWriter, r *http.Request)
+	AddClub(models.Club) (*models.Club, error)
 	ListClubs() (*[]models.Club, error)
 	Serve(w http.ResponseWriter, r *http.Request)
 	ServeJSON(w http.ResponseWriter, r *http.Request)
@@ -38,22 +38,8 @@ func (s *service) ListClubs() (*[]models.Club, error) {
 }
 
 // AddClub will add a club to the repository
-func (s *service) AddClub(w http.ResponseWriter, r *http.Request) {
-	var club models.Club
-	err := json.NewDecoder(r.Body).Decode(&club)
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(`"error":"Error unmarshaling the request"`))
-		return
-	}
-	w.WriteHeader(http.StatusOK)
-	s.r.AddClub(club)
-	// clist, _ := s.r.ListClubs()
-	// result, _ := json.MarshalIndent(clist, "", "  ")
-	result, _ := json.MarshalIndent(club, "", "  ")
-
-	w.Write(result)
-	return
+func (s *service) AddClub(models.Club) (*models.Club, error) {
+	return nil, nil
 }
 
 // Serve turns Service into an HTTP server
