@@ -18,8 +18,8 @@ func Routing(r *mux.Router) {
 	sch := rclub.NewServer(sc, r)
 
 	r.HandleFunc("/", handlers.Home).Methods("GET")
-	r.HandleFunc("/club/list", sch.HandleHTTP(sc.ListClubs())).Methods("GET")
-	r.HandleFunc("/club/jlist", sch.HandleJSON(sc.ListClubs())).Methods("GET")
+	r.HandleFunc("/club/list", sch.HandleHTTP())
+	r.HandleFunc("/club/jlist", sch.HandleJSON())
 	r.HandleFunc("/fencer/list", sfh.HandleHTTP())
 	r.HandleFunc("/fencer/jlist", sfh.HandleJSON())
 	// r.HandleFunc("/club/add", sch.HandleAdd(sc.AddClub())).Methods("POST")

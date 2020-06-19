@@ -13,8 +13,8 @@ import (
 
 // Server defines the methods on the server
 type Server interface {
-	HandleJSON(*[]models.Club, error) http.HandlerFunc
-	HandleHTTP(*[]models.Club, error) http.HandlerFunc
+	HandleJSON() http.HandlerFunc
+	HandleHTTP() http.HandlerFunc
 	HandleAdd(error) http.HandlerFunc
 }
 
@@ -30,7 +30,8 @@ func NewServer(s club.Service, m *mux.Router) Server {
 }
 
 // HandleJSON serves the list of fencers in JSON format
-func (s *server) HandleJSON(clubs *[]models.Club, err error) http.HandlerFunc {
+func (s *server) HandleJSON() http.HandlerFunc {
+	clubs, _ := s.s.ListClubs()
 	return func(w http.ResponseWriter, r *http.Request) {
 		// TODO: Deal with err when not nil
 		json, _ := json.MarshalIndent(clubs, "", "  ")
@@ -39,7 +40,8 @@ func (s *server) HandleJSON(clubs *[]models.Club, err error) http.HandlerFunc {
 }
 
 // HandleJSON serves the list of fencers in JSON format
-func (s *server) HandleHTTP(clubs *[]models.Club, err error) http.HandlerFunc {
+func (s *server) HandleHTTP() http.HandlerFunc {
+	clubs, _ := s.s.ListClubs()
 	return func(w http.ResponseWriter, r *http.Request) {
 		// TODO: Deal with err when not nil
 		fmt.Fprintf(w, "%v\n", *clubs)
