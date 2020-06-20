@@ -15,7 +15,7 @@ import (
 type Server interface {
 	HandleJSON() http.HandlerFunc
 	HandleHTTP() http.HandlerFunc
-	HandleAdd(error) http.HandlerFunc
+	HandleAdd() http.HandlerFunc
 }
 
 // server defines the local dependencies
@@ -48,23 +48,37 @@ func (s *server) HandleHTTP() http.HandlerFunc {
 	}
 }
 
-func (s *server) HandleAdd(err error) http.HandlerFunc {
+func (s *server) HandleAdd() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var club models.Club
-		err := json.NewDecoder(r.Body).Decode(&club)
-		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			w.Write([]byte(`"error":"Error unmarshaling the request"`))
+		// method := r.Method
+		// log.Printf("%v\n", method)
+
+		if r.Method == "POST" {
+			var club models.Club
+			err := json.NewDecoder(r.Body).Decode(&club)
+			if err != nil {
+				w.WriteHeader(http.StatusInternalServerError)
+				w.Write([]byte(`"error":"Error unmarshaling the request"`))
+				return
+			}
+
+			newclub, err := s.s.AddClub(club)
+			if err != nil {
+				log.Printf("%v\n", err)
+				w.Write([]byte("Error adding club"))
+				return
+			}
+
+			result, _ := json.MarshalIndent(newclub, "", "  ")
+			log.Printf("Output:\n%v\n", result)
+
+			w.WriteHeader(http.StatusOK)
+			w.Write(result)
 			return
+
 		}
-
-		newclub, err := s.s.AddClub(club)
-
-		// *clubs = append(*clubs, club)
-		result, _ := json.MarshalIndent(&newclub, "", "  ")
-		log.Printf("%v\n", err)
-		w.WriteHeader(http.StatusOK)
-		w.Write(result)
-
+		log.Printf("%v\n", r.Method)
+		w.Write([]byte("It's a \"GET\""))
+		return
 	}
 }

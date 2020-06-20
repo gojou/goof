@@ -33,8 +33,9 @@ func (s *service) ListClubs() (*[]models.Club, error) {
 }
 
 // AddClub will add a club to the repository
-func (s *service) AddClub(models.Club) (*models.Club, error) {
-	return nil, nil
+func (s *service) AddClub(club models.Club) (newclub *models.Club, err error) {
+	s.r.AddClub(club)
+	return newclub, err
 }
 
 // // Serve turns Service into an HTTP server
