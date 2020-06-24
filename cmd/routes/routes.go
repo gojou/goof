@@ -2,6 +2,7 @@ package routes
 
 import (
 	"github.com/gojou/goof/pkg/handlers"
+	//Alias the club and fencer REST services
 	rclub "github.com/gojou/goof/pkg/rest/club"
 	rfencer "github.com/gojou/goof/pkg/rest/fencer"
 	"github.com/gojou/goof/pkg/services/club"
