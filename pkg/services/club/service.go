@@ -2,7 +2,8 @@ package club
 
 import (
 	"github.com/gojou/goof/pkg/models"
-	"github.com/gojou/goof/pkg/services/club/repository"
+	repo "github.com/gojou/goof/pkg/services/club/firestore"
+
 	"github.com/gorilla/mux"
 )
 
@@ -14,13 +15,13 @@ type Service interface {
 }
 
 type service struct {
-	r *repository.Repository
+	r *repo.Repository
 	m *mux.Router
 }
 
 // NewService todo
 func NewService(mux *mux.Router) Service {
-	r := new(repository.Repository)
+	r := new(repo.Repository)
 
 	return &service{r, mux}
 }
