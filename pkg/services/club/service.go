@@ -2,7 +2,7 @@ package club
 
 import (
 	"github.com/gojou/goof/pkg/models"
-	repo "github.com/gojou/goof/pkg/services/club/firestore"
+	repo "github.com/gojou/goof/pkg/services/club/repository"
 
 	"github.com/gorilla/mux"
 )
