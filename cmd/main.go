@@ -19,16 +19,8 @@ func main() {
 }
 func run() (e error) {
 	r := mux.NewRouter()
-	
-	// s := fencer.NewService(r)
-	// c := club.NewService(r)
-	// fs, _ := s.ListFencers()
-	// cs, _ := c.ListClubs()
-	// log.Println(*fs)
-	// log.Println(*cs)
 
 	routes.Routing(r)
-	//	s := service.NewService(r)
 
 	// Critical to work on AppEngine
 	port := os.Getenv("PORT")
