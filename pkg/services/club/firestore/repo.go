@@ -1,12 +1,16 @@
 package firestore
 
 import (
+	"context"
+	"log"
+
+	"cloud.google.com/go/firestore"
 	"github.com/gojou/goof/pkg/models"
 )
 
 var clubs = []models.Club{
 	models.Club{
-		ID:   "pfc",
+		ID:   "PFC",
 		Name: "Peekskill Fencing Center",
 		City: "Peekskill",
 	},
@@ -20,6 +24,23 @@ var clubs = []models.Club{
 // Repository is the foundation for the methods returned
 type Repository struct {
 	clubs []models.Club
+	db    *firestore.Client
+	ctx   context.Context
+}
+
+// NewRepo returns the pointer to the Firstore client
+func NewRepo() (*Repository, error) {
+	// Use the application default credentials
+	repo := &Repository{}
+	repo.ctx = context.Background()
+
+	client, e := firestore.NewClient(repo.ctx, "goof")
+	if e != nil {
+		log.Fatalln(e)
+	}
+	// defer client.Close()
+	repo.db = client
+	return repo, e
 }
 
 // Club is a member of a fantasy fencing club
