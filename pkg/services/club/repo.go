@@ -1,12 +1,12 @@
-package firestore
+package club
 
 import (
 	"context"
 	"log"
 
 	"cloud.google.com/go/firestore"
-	_ "github.com/gojou/goof/pkg/club"
-	"github.com/gojou/goof/pkg/models"
+	//Preventing stutter
+	// _ "github.com/gojou/goof/pkg/services/club"
 )
 
 var clubs = []Club{
