@@ -1,4 +1,4 @@
-package models
+package club
 
 // Club represents Club information
 type Club struct {

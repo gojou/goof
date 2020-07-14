@@ -1,10 +1,11 @@
 package repository
 
 import (
+	"github.com/gojou/goof/pkg/club"
 	"github.com/gojou/goof/pkg/models"
 )
 
-var clubs = []models.Club{
+var clubs = []club.Club{
 	models.Club{
 		ID:   "pfc",
 		Name: "Peekskill Fencing Center",
@@ -19,13 +20,13 @@ var clubs = []models.Club{
 
 // Repository is the foundation for the methods returned
 type Repository struct {
-	clubs []models.Club
+	clubs []club.Club
 }
 
 // Club is a member of a fantasy fencing club
 type Club interface {
-	GetClub(id string) (*models.Club, error)
-	AddClub(club models.Club) (*models.Club, error)
+	GetClub(id string) (*club.Club, error)
+	AddClub(club club.Club) (*models.Club, error)
 	ListClubs() (*[]models.Club, error)
 }
 

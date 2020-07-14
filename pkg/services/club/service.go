@@ -1,7 +1,6 @@
 package club
 
 import (
-	"github.com/gojou/goof/pkg/models"
 	repo "github.com/gojou/goof/pkg/services/club/firestore"
 
 	"github.com/gorilla/mux"
@@ -10,8 +9,8 @@ import (
 // Service todo
 type Service interface {
 	// GetClub(id string) (*models.Club, error)
-	AddClub(models.Club) (*models.Club, error)
-	ListClubs() (*[]models.Club, error)
+	AddClub(Club) (*Club, error)
+	ListClubs() (*[]Club, error)
 }
 
 type service struct {
@@ -27,12 +26,12 @@ func NewService(mux *mux.Router) Service {
 }
 
 // ListFencers returns a list of all fencers in the repo
-func (s *service) ListClubs() (*[]models.Club, error) {
+func (s *service) ListClubs() (*[]Club, error) {
 	return s.r.ListClubs()
 }
 
 // AddClub will add a club to the repository
-func (s *service) AddClub(club models.Club) (newclub *models.Club, err error) {
+func (s *service) AddClub(club Club) (newclub *Club, err error) {
 	s.r.AddClub(club)
 	return newclub, err
 }
