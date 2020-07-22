@@ -15,6 +15,11 @@ var clubs = []models.Club{
 		Name: "Croton Harmon Fencing Club",
 		City: "Croton-on-Hudson",
 	},
+	models.Club{
+		ID:   "hvlst",
+		Name: "HVLST Combat",
+		City: "Croton-on-Hudson",
+	},
 }
 
 // Repository is the foundation for the methods returned
