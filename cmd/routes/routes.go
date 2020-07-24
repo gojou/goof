@@ -2,7 +2,6 @@ package routes
 
 import (
 	"github.com/gojou/goof/pkg/handlers"
-	//Alias the club and fencer REST services
 	rclub "github.com/gojou/goof/pkg/rest/club"
 	rfencer "github.com/gojou/goof/pkg/rest/fencer"
 	"github.com/gojou/goof/pkg/services/club"
@@ -14,7 +13,7 @@ import (
 // Routing defines the API for goof
 func Routing(r *mux.Router) {
 	sf := fencer.NewService()
-	sc := club.NewService(r)
+	sc := club.NewService()
 	sfh := rfencer.NewServer(sf, r)
 	sch := rclub.NewServer(sc, r)
 
@@ -24,9 +23,5 @@ func Routing(r *mux.Router) {
 	r.HandleFunc("/fencer/list", sfh.HandleHTTP())
 	r.HandleFunc("/fencer/jlist", sfh.HandleJSON())
 	r.HandleFunc("/club/add", sch.HandleAdd())
-
-	// r.HandleFunc("/club", sc.AddClub).Methods("POST")
-	// r.HandleFunc("/club/list", sc.Serve).Methods("GET")
-	// r.HandleFunc("/club/jlist", sc.ServeJSON).Methods("GET")
 
 }
