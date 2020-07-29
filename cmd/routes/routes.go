@@ -2,8 +2,8 @@ package routes
 
 import (
 	"github.com/gojou/goof/pkg/handlers"
-	rclub "github.com/gojou/goof/pkg/rest/club"
-	rfencer "github.com/gojou/goof/pkg/rest/fencer"
+	httpclub "github.com/gojou/goof/pkg/rest/club"
+	httpfencer "github.com/gojou/goof/pkg/rest/fencer"
 	"github.com/gojou/goof/pkg/services/club"
 	"github.com/gojou/goof/pkg/services/fencer"
 
@@ -14,8 +14,8 @@ import (
 func Routing(r *mux.Router) {
 	sf := fencer.NewService()
 	sc := club.NewService()
-	sfh := rfencer.NewServer(sf, r)
-	sch := rclub.NewServer(sc, r)
+	sfh := httpfencer.NewServer(sf, r)
+	sch := httpclub.NewServer(sc, r)
 
 	r.HandleFunc("/", handlers.Home).Methods("GET")
 	r.HandleFunc("/club/list", sch.HandleHTTP())

@@ -7,19 +7,23 @@ import (
 
 // Service todo
 type Service interface {
-	// GetClub(id string) (*models.Club, error)
+	GetClub(id string) (*models.Club, error)
 	AddClub(models.Club) (*models.Club, error)
 	ListClubs() (*[]models.Club, error)
 }
 
 type service struct {
-	r *repo.Repository
+	r Storage
 }
 
 // NewService initializes the dependencies for the Club service
 func NewService() Service {
 	r := new(repo.Repository)
 	return &service{r}
+}
+
+func (s service) GetClub(clubID string) (*models.Club, error) {
+	return s.r.GetClub(clubID)
 }
 
 // ListClubs returns a list of all fencers in the repo
