@@ -2,8 +2,8 @@ package routes
 
 import (
 	"github.com/gojou/goof/pkg/handlers"
-	httpclub "github.com/gojou/goof/pkg/rest/club"
-	httpfencer "github.com/gojou/goof/pkg/rest/fencer"
+	clubhttp "github.com/gojou/goof/pkg/rest/club"
+	fencerhttp "github.com/gojou/goof/pkg/rest/fencer"
 	"github.com/gojou/goof/pkg/services/club"
 	"github.com/gojou/goof/pkg/services/fencer"
 
@@ -12,16 +12,16 @@ import (
 
 // Routing defines the API for goof
 func Routing(r *mux.Router) {
-	sf := fencer.NewService()
-	sc := club.NewService()
-	sfh := httpfencer.NewServer(sf, r)
-	sch := httpclub.NewServer(sc, r)
+	fs := fencer.NewService()
+	cs := club.NewService()
+	fhs := fencerhttp.NewServer(fs, r)
+	chs := clubhttp.NewServer(cs, r)
 
 	r.HandleFunc("/", handlers.Home).Methods("GET")
-	r.HandleFunc("/club/list", sch.HandleHTTP())
-	r.HandleFunc("/club/jlist", sch.HandleJSON())
-	r.HandleFunc("/fencer/list", sfh.HandleHTTP())
-	r.HandleFunc("/fencer/jlist", sfh.HandleJSON())
-	r.HandleFunc("/club/add", sch.HandleAdd())
+	r.HandleFunc("/club/list", chs.HandleHTTP())
+	r.HandleFunc("/club/jlist", chs.HandleJSON())
+	r.HandleFunc("/fencer/list", fhs.HandleHTTP())
+	r.HandleFunc("/fencer/jlist", fhs.HandleJSON())
+	r.HandleFunc("/club/add", chs.HandleAdd())
 
 }
