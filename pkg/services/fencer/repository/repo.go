@@ -33,7 +33,7 @@ type Repository struct {
 // Fencer is a member of a fantasy fencing club
 type Fencer interface {
 	GetFencer(id string) (*models.Fencer, error)
-	AddFencer(fencer *models.Fencer) (*models.Fencer, error)
+	AddFencer(fencer models.Fencer) (*models.Fencer, error)
 	ListFencers() (*[]models.Fencer, error)
 }
 
@@ -43,7 +43,7 @@ func (*Repository) GetFencer(id string) (*models.Fencer, error) {
 }
 
 //AddFencer adds a fencer, eventually
-func (*Repository) AddFencer(fencer *models.Fencer) (*models.Fencer, error) {
+func (*Repository) AddFencer(fencer models.Fencer) (*models.Fencer, error) {
 	return nil, nil
 }
 

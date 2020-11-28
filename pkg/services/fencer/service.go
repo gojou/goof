@@ -13,7 +13,7 @@ type service struct {
 // Service todo
 type Service interface {
 	GetFencer(id string) (*models.Fencer, error)
-	AddFencer(fencer *models.Fencer) (*models.Fencer, error)
+	AddFencer(fencer models.Fencer) (*models.Fencer, error)
 	ListFencers() (*[]models.Fencer, error)
 }
 
@@ -30,7 +30,7 @@ func (*service) GetFencer(id string) (*models.Fencer, error) {
 }
 
 // AddFencer adds a fencer struct to the repository
-func (*service) AddFencer(fencer *models.Fencer) (*models.Fencer, error) {
+func (*service) AddFencer(fencer models.Fencer) (*models.Fencer, error) {
 	return nil, nil
 }
 

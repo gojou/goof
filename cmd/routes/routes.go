@@ -23,5 +23,5 @@ func Routing(r *mux.Router) {
 	r.HandleFunc("/fencer/list", fhs.HandleHTTP())
 	r.HandleFunc("/fencer/jlist", fhs.HandleJSON())
 	r.HandleFunc("/club/add", chs.HandleAdd())
-
+	r.HandleFunc("/fencer/add", fhs.HandleAdd())
 }
